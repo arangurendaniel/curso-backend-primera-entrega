@@ -13,16 +13,15 @@
   },
   {
     "id": 2,
+    "code": "AB2",
+    "title": "Frases 2",
+    "description": "Hermosa taza de ceramica con el mensaje 'Nadie te preguntó', perfecta para regalar o para mostrar en la oficina, de seguro que con esta taza tan curiosa se iniciarán conversaciones interesantes.",
+    "price": 3000,
     "thumbnails": [
       "https://i.postimg.cc/SxvQp45t/frases-2.jpg"
     ],
-    "title": "Frases 2",
-    "price": 1600,
-    "description": "Hermosa taza de ceramica con el mensaje 'Nadie te preguntó', perfecta para regalar o para mostrar en la oficina, de seguro que con esta taza tan curiosa se iniciarán conversaciones interesantes.",
-    "category": "Tazas",
-    "status": true,
     "stock": 10,
-    "code": "AB2"
+    "status": true
   },
   {
     "id": 3,

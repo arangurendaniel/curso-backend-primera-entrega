@@ -19,25 +19,20 @@ productsRouter.get("/", (req, resp) => {
     })
 })
 
-productsRouter.get("/:pid", (req, resp) => {
-    manager.getProducts()
-    .then((data) => {
-        let productId = req.params.pid;
-        let numero = isNaN(productId)
-        if (!numero) {
-            productId = parseInt(productId);
-    
-            let producto = data.find((data) => data.id === productId)
-    
-            if (producto) {
-                resp.send(producto)
-            } else {
-                resp.send(`No existe ningún producto con el ID: ${productId}`)
-            }
-        } else {
-            resp.send("Los id de productos solo contienen numeros")
-        }
-    })
+productsRouter.get("/:pid", async (req, resp) => {
+    let productId = req.params.pid;
+    let numero = isNaN(productId)
+    if (!numero) {
+        productId = parseInt(productId);
+
+        const producto = await manager.findProduct(productId)
+
+        producto ? resp.status(200).send(producto) : resp.status(400).send(`No existe ningún producto con el ID: ${productId}`)
+
+    } else {
+        resp.send("Los id de productos solo contienen numeros")
+    }
+
 })
 
 
@@ -63,7 +58,7 @@ productsRouter.put("/:pid", (req, resp) => {
             let productoOriginal = ProductsData.find((ProductData) => ProductData.id === productId)
     
             if (productoOriginal) {
-                manager.modificarProducto(productoOriginal, newProduct)
+                manager.modificarProducto(productoOriginal.id, newProduct)
                 resp.status(200).send("Producto Modificado")
             } else {
                 resp.send(`No existe ningún producto con el ID: ${productId}`)

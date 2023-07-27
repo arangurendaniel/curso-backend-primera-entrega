@@ -27,7 +27,7 @@ cartsRouter.get("/:cid", (req, resp) => {
             }
         })
     } else {
-        resp.send("Error")
+        resp.status(400).send("The ID cart only contains numbers")
     }
 })
 
@@ -41,51 +41,22 @@ cartsRouter.post("/:cid/product/:pid", async (req, resp) => {
         cartId = parseInt(cartId);
         productId = parseInt(productId);
 
-        managerProducts.consultarProductos()
-        .then((data) => {
-            let product = data.find((data) => data.id === productId)
-            if (!product) {
-                console.log(product)
-                resp.status(400).send(`There's no product with the ID ${productId}`)
-                throw new Error(`There's no product with the ID ${productId}`)
-            }
-        })
-
-        let cart = await managerCarts.findCart(cartId);
-
-        const newProduct = {productId: productId, quantity: 1 }
-
-        if (cart) {
-            const exist = cart.products.some((product) => product.productId === productId)
-            if (exist) {
-                cart.products = cart.products.map((product) => {
-                    if (product.productId === productId) {
-                        product.quantity++
-                        return product
-                    } else {
-                        return product
-                    }
-                })
-            } else {
-                cart.products.push(newProduct)
-            }
-            let allCarts = await managerCarts.getCarts()
-            allCarts = allCarts.map((iteratedCart) => {
-                if (iteratedCart.id === cart.id) {
-                    iteratedCart = {...cart}
-                    return iteratedCart
+        const products = await managerProducts.getProducts()
+        if (products) {
+            const product = products.find((prod) => prod.id === productId);
+            if (product) {
+                const result = await managerCarts.addProductToCart(cartId, productId)
+                if (result) {
+                    return resp.status(200).send("The product was added successfully")
                 } else {
-                    return iteratedCart
+                    return resp.status(400).send("There's no cart with that ID")
                 }
-            })
-            await fs.promises.writeFile("./Carts.json", JSON.stringify(allCarts, null, 2));
-            return resp.status(200).send("The product was added successfully")
-        } else {
-            return resp.status(400).send("There's no cart with that ID")
+            } else {
+                return resp.status(400).send(`There's no product with the ID ${productId}`)
+            }
         }
-    } else {
-        return resp.status(400).send("The product ID and the Cart ID must only have numbers")
     }
+    return resp.status(400).send("The product ID and the Cart ID must only have numbers")
 })
 
 cartsRouter.delete("/:cid/product/:pid", async (req, resp) => {
@@ -121,7 +92,7 @@ cartsRouter.delete("/:cid/product/:pid", async (req, resp) => {
             }
 
         } else {
-            return resp.status(400).send(`There's no product with the ID: ${productId}`)
+            return resp.status(400).send(`There's no cart with the ID: ${productId}`)
         }
 
     } else {

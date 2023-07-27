@@ -18,6 +18,12 @@ class ManagerProducts {
         }
     }
 
+    async findProduct(productId) {
+        let products = await this.getProducts();
+        const specificProduct = products.find((prod) => prod.id === productId)
+        return specificProduct
+    }
+
     async crearProducto(newProduct) {
         let productos = await this.getProducts();
         if (productos) {
@@ -58,8 +64,9 @@ class ManagerProducts {
             console.log("Please include all properties")
             return undefined
         } else {
+            console.log(productoOriginal)
             const productoModificado = {
-                id: productoOriginal.id, 
+                id: productoOriginal, 
                 code: newProduct.code, 
                 title: newProduct.title,
                 description: newProduct.description,
