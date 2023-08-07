@@ -4,6 +4,7 @@
     "code": "FF1",
     "title": "Coffee First",
     "description": "Hermosa taza de ceramica con el mensaje Coffee First, perfecta para regalar o para mostrar en la oficina, de seguro que con esta taza tan curiosa se iniciarán conversaciones interesantes.",
+    "category": "Tazas",
     "price": 1600,
     "thumbnails": [
       "https://i.postimg.cc/V6MkRhKZ/coffee-first.jpg"
@@ -16,6 +17,7 @@
     "code": "AB2",
     "title": "Frases 2",
     "description": "Hermosa taza de ceramica con el mensaje 'Nadie te preguntó', perfecta para regalar o para mostrar en la oficina, de seguro que con esta taza tan curiosa se iniciarán conversaciones interesantes.",
+    "category": "Tazas",
     "price": 3000,
     "thumbnails": [
       "https://i.postimg.cc/SxvQp45t/frases-2.jpg"

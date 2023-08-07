@@ -50,7 +50,7 @@ class ManagerProducts {
                     }
                     productos = [...productos, producto ]
                     await fs.promises.writeFile("./Productos.json", JSON.stringify(productos, null, 2));
-                    return "The product was addedd successfully"
+                    return console.log("The product was addedd successfully") 
                 }
             }
         } else {

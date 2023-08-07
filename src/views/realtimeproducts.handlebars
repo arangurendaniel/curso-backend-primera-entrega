@@ -1,0 +1,37 @@
+<h1 class="title-main" >Meme's House</h1>
+<form class="formulario-pagos" id="formProducts-add">
+    <h2>Real Time Products</h2>
+    <h3>Add a new Product</h3>
+    <section>
+        <label for="">New product's title</label>
+        <input type="text" name="title" id="title" required>
+        <label for="">New product's description</label>
+        <input type="text" name="description" id="description" required>
+        <label for="">New product's price</label>
+        <input type="number" name="price" id="price" required>
+        <label for="">New product's stock</label>
+        <input type="number" name="stock" id="stock" required>
+        <label for="">New product's thumbnails</label>
+        <input type="text" name="thumbnails" id="thumbnail" required>
+        <label for="">New product's category</label>
+        <input type="text" name="category" id="category" required>
+        <label for="">New product's code</label>
+        <input type="text" name="code" id="code" required>
+    </section>
+    <input class="boton-completar-transaccion" type="submit" value="Add Product">
+</form>
+<form class="formulario-pagos" id="formProducts-delete">
+    <section>
+        <h3>Delete a product</h3>
+        <label for="">Product's ID</label>
+        <input id="delete-id-input" type="text">
+    </section>
+    <input class="boton-completar-transaccion" id="delete-btn" type="submit" value="Delete Product">
+</form>
+
+<div class="container-items">
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>
